@@ -2,5 +2,8 @@
 
 source ~/.bashrc
 
-PATH=$PATH:/cygdrive/d/dream/study/LinuxWorkEnvironment/scripts #
+PATH=$PATH:/face2wind/bin
+
+# live PATH setting, script created
+PATH=$PATH:/face2wind/study/softwareDevelop/projects/LinuxWorkEnvironment/scripts #
 
