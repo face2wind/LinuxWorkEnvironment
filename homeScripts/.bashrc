@@ -26,7 +26,7 @@ export LANG=en_US.UTF-8
 #export LANG=zh_CN.UTF-8
 
 #export PS1='[\[\e[35;1m\]\u@\[\e[34;1m\]Windows\[\e[32;1m\] \t \[\e[31;1m\]\w\[\e[0m\]]# '
-export PS1='[\[\e[34;1m\]\w\[\e[0m\]] \n[\[\e[35;1m\]face2wind\] >> '
+export PS1='[\[\e[34;1m\]\w\[\e[0m\]] \n[\[\e[35;1m\]face2wind] >> '
 
 export HISTTIMEFORMAT="`whoami` %F %T "
 export HISTFILESIZE=1000000
