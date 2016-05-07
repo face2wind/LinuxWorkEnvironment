@@ -9,8 +9,13 @@ lispPath=`echo $path |  sed -e 's/install.sh/personalLisp/'`
 cd ~
 
 if [ -f ".emacs" -o -L ".emacs" ] ; then
-    echo "backup old .emacs"
-    mv .emacs .emacs.bak
+    if [ -f ".emacs.bak" -o -L ".emacs.bak" ] ; then
+	echo "remove old .emacs"
+	rm -rf .emacs
+    else
+	echo "backup old .emacs"
+	mv .emacs .emacs.bak
+    fi
 fi
 
 if [ ! -d ".emacs.d" ] ; then
@@ -19,8 +24,9 @@ if [ ! -d ".emacs.d" ] ; then
 fi
 
 if [ -f ".emacs.d/personalLisp" -o -L ".emacs.d/personalLisp" ] ; then
-    echo "backup old personalLisp"
-    mv .emacs.d/personalLisp .emacs.d/personalLisp.bak
+    echo "remove old personalLisp"
+    rm -rf .emacs.d/personalLisp
+    #mv .emacs.d/personalLisp .emacs.d/personalLisp.bak
 fi
 
 echo "ln -s $configPath ."

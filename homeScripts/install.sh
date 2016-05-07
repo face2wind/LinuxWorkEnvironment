@@ -10,12 +10,22 @@ profilePath=`echo $path |  sed -e 's/install.sh/.profile/'`
 cd ~
 
 if [ -f ".profile" -o -L ".profile" ] ; then
-    echo "backup old .profile"
-    mv .profile .profile.bak
+    if [ -f ".profile.bak" -o -L ".profile.bak" ] ; then
+	echo "remove old .profile"
+	rm -rf .profile
+    else
+	echo "backup old .profile"
+	mv .profile .profile.bak
+    fi
 fi
 if [ -f ".bashrc" -o -L ".bashrc" ] ; then
-    echo "backup old .bashrc"
-    mv .bashrc .bashrc.bak
+    if [ -f ".bashrc.bak" -o -L ".bashrc.bak" ] ; then
+	echo "remove old .bashrc"
+	rm -rf .bashrc
+    else
+	echo "backup old .bashrc"
+	mv .bashrc .bashrc.bak
+    fi
 fi
 
 echo "ln -s $bashrcPath ."
