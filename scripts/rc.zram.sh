@@ -6,7 +6,7 @@
 # Size of swap space in MB
 # default 1GB
 
-SIZE=256 #MB
+SIZE=1024 #MB
 
 start() {
     modprobe zram
