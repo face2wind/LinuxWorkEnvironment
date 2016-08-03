@@ -1,37 +1,47 @@
-#!/bin/bash
-#
-# /etc/rc.d/rc.zram
-# Script to start zRam (Virtual Swap Compressed in RAM)
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          zram
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     S
+# Default-Stop:      0 1 6
+# Short-Description: Use compressed RAM as in-memory swap
+# Description:       Use compressed RAM as in-memory swap
+### END INIT INFO
 
-# Size of swap space in MB
-# default 1GB
+# Author: Antonio Galea <antonio.galea@gmail.com>
+# Thanks to Przemysław Tomczyk for suggesting swapoff parallelization
+# Distributed under the GPL version 3 or above, see terms at
+#      https://gnu.org/licenses/gpl-3.0.txt
 
-SIZE=1024 #MB
+FRACTION=200
 
-start() {
-    modprobe zram
-    echo $SIZE*1024*1024 | bc > /sys/block/zram0/disksize
-    mkswap /dev/zram0
-    swapon -p 10 /dev/zram0
-}
-
-stop() {
-    swapoff /dev/zram0
-}
+MEMORY=`perl -ne'/^MemTotal:\s+(\d+)/ && print $1*1024;' < /proc/meminfo`
+CPUS=`grep -c processor /proc/cpuinfo`
+SIZE=$(( MEMORY * FRACTION / 100 / CPUS ))
 
 case "$1" in
-    start)
-	start
+    "start")
+	param=`modinfo zram|grep num_devices|cut -f2 -d:|tr -d ' '`
+	modprobe zram $param=$CPUS
+	for n in `seq $CPUS`; do
+	    i=$((n - 1))
+	    echo $SIZE > /sys/block/zram$i/disksize
+	    mkswap -L "zRAM_$i" /dev/zram$i
+	    swapon /dev/zram$i -p 10
+	done
 	;;
-
-    stop)
-	stop
+    "stop")
+	for n in `seq $CPUS`; do
+	    i=$((n - 1))
+	    swapoff /dev/zram$i && echo "disabled disk $n of $CPUS"
+	done
+	wait
+	sleep .5
+	modprobe -r zram
 	;;
-
-    restart)
-	echo 1 > /sys/block/zram0/reset
-	;;
-
     *)
-	echo "Usage: $0 (start|stop|restart)"
+	echo "Usage: `basename $0` (start | stop)"
+	exit 1
+	;;
 esac
