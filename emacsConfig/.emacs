@@ -89,7 +89,11 @@
 ;;(global-set-key (kbd "C-d") 'gtags-find-with-grep)
 (global-set-key (kbd "C-c C-f") 'rgrep)
 
-(global-set-key (kbd "<f5>") 'revert-buffer)
+(global-set-key (kbd "<f5>") (lambda ()
+			       (interactive)
+			       (revert-buffer t t t)
+			       (message "buffer is reverted")))
+;;(global-set-key (kbd "<f5>") 'revert-buffer)
 (global-set-key (kbd "<f2>") 'rename-buffer)
 
 (require 'google-c-style)
