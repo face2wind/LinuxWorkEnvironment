@@ -159,8 +159,12 @@ There is a short poem for remembering,
     (holiday-lunar 6 7 "健生日" 0)
     (holiday-lunar 8 15 "中秋节" 0)
 
+    (holiday-float 5 0 2 "母亲节")
+    (holiday-float 6 0 3 "父亲节")
+    
     (holiday-solar-term "清明" "清明节")
 
+    (holiday-fixed 2 14 "情人节")
     (holiday-fixed 5 1 "劳动节")
     (holiday-fixed 5 4 "青年节")
     (holiday-fixed 6 1 "儿童节")
