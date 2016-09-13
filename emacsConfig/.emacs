@@ -10,6 +10,7 @@
 (add-to-list 'load-path "~/.emacs.d/personalLisp/googleCStyle")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/protobuf")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/cmake")
+(add-to-list 'load-path "~/.emacs.d/personalLisp/cal_china")
 
 (display-time-mode 1) ; 显示时间
 (setq display-time-24hr-format t) ; 24小时格式
@@ -75,6 +76,11 @@
        '(("\\.cmake\\'" . cmake-mode))
        auto-mode-alist))
 ;;(autoload 'cmake-mode "cmake-mode.el" t)
+
+(require 'cal-china-x)
+(setq mark-holidays-in-calendar t)
+(setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
+(setq calendar-holidays (append cal-china-x-important-holidays))
 
 ;; shortcut keys ==============================
 
