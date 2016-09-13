@@ -24,7 +24,7 @@
 (defun insert-date ()
   "Insert date at point."
   (interactive)
-  (insert (format-time-string "%Y年%m月%e日 %l:%M %a %p")))
+  (insert (format-time-string "%Y年%m月%e日 %l点%M分 %a %p")))
 
 (show-paren-mode) ;;显示匹配的括号
 
@@ -83,6 +83,19 @@
 (setq calendar-holidays (append cal-china-x-important-holidays))
 (setq calendar-week-start-day 1)            ; 设置星期一为每周的第一天
 
+(load-theme 'wombat t)
+
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+(require 'protobuf-mode)
+(setq auto-mode-alist  (cons '(".proto$" . protobuf-mode) auto-mode-alist))
+
+(tool-bar-mode 0)
+;;(menu-bar-mode 0)
+(scroll-bar-mode 0)
+
 ;; shortcut keys ==============================
 
 (global-set-key (kbd "C-l") 'goto-line)
@@ -102,11 +115,4 @@
 			       (message "buffer is reverted")))
 ;;(global-set-key (kbd "<f5>") 'revert-buffer)
 (global-set-key (kbd "<f2>") 'rename-buffer)
-
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-(require 'protobuf-mode)
-(setq auto-mode-alist  (cons '(".proto$" . protobuf-mode) auto-mode-alist))
 
