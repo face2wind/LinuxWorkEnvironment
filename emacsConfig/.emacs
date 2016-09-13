@@ -81,6 +81,7 @@
 (setq mark-holidays-in-calendar t)
 (setq cal-china-x-important-holidays cal-china-x-chinese-holidays)
 (setq calendar-holidays (append cal-china-x-important-holidays))
+(setq calendar-week-start-day 1)            ; 设置星期一为每周的第一天
 
 ;; shortcut keys ==============================
 
