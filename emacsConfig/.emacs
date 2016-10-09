@@ -101,13 +101,16 @@
 (global-set-key (kbd "C-l") 'goto-line)
 (global-set-key (kbd "C-u") 'undo)
 
-(global-set-key (kbd "C-x C-g") 'gtags-find-tag)
-
 ;;(global-set-key (kbd "C-f") 'gtags-find-file)
 (global-set-key (kbd "C-f") 'grep-find)
 
+(global-set-key (kbd "C-a") 'mark-whole-buffer)
+
+(global-set-key (kbd "C-x C-g") 'gtags-find-tag)
 ;;(global-set-key (kbd "C-d") 'gtags-find-with-grep)
+
 (global-set-key (kbd "C-c C-f") 'rgrep)
+(global-set-key (kbd "C-c C-a") 'set-mark-command)
 
 (global-set-key (kbd "<f5>") (lambda ()
 			       (interactive)
