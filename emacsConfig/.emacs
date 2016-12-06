@@ -11,6 +11,7 @@
 (add-to-list 'load-path "~/.emacs.d/personalLisp/protobuf")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/cmake")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/cal_china")
+(add-to-list 'load-path "~/.emacs.d/personalLisp/markdown")
 
 (display-time-mode 1) ; 显示时间
 (setq display-time-24hr-format t) ; 24小时格式
@@ -62,6 +63,7 @@
 (require 'auto-complete-clang)
 
 (global-auto-complete-mode)
+
 (global-linum-mode)
 (ido-mode)
 
@@ -83,8 +85,6 @@
 (setq calendar-holidays (append cal-china-x-important-holidays))
 (setq calendar-week-start-day 1)            ; 设置星期一为每周的第一天
 
-(load-theme 'wombat t)
-
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -92,8 +92,15 @@
 (require 'protobuf-mode)
 (setq auto-mode-alist  (cons '(".proto$" . protobuf-mode) auto-mode-alist))
 
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(load-theme 'wombat t)
 (tool-bar-mode 0)
-;;(menu-bar-mode 0)
+(menu-bar-mode 0)
 (scroll-bar-mode 0)
 
 ;; shortcut keys ==============================
@@ -104,7 +111,7 @@
 ;;(global-set-key (kbd "C-f") 'gtags-find-file)
 (global-set-key (kbd "C-f") 'grep-find)
 
-(global-set-key (kbd "C-a") 'mark-whole-buffer)
+;;(global-set-key (kbd "C-a") 'mark-whole-buffer)
 
 (global-set-key (kbd "C-x C-g") 'gtags-find-tag)
 ;;(global-set-key (kbd "C-d") 'gtags-find-with-grep)
@@ -118,4 +125,25 @@
 			       (message "buffer is reverted")))
 ;;(global-set-key (kbd "<f5>") 'revert-buffer)
 (global-set-key (kbd "<f2>") 'rename-buffer)
+
+(setq gdb-many-windows t)
+(global-set-key (kbd "<f6>") 'gdb)
+(global-set-key (kbd "<f7>") 'gud-run)
+;;(global-set-key [S-f5] 'gud-cont)
+;;(global-set-key (kbd "C-c <f7>") 'compile)
+;;(global-set-key [f8] 'gud-print)
+;;(global-set-key [C-f8] 'gud-pstar)
+(global-set-key (kbd "<f8>") 'gud-print)
+(global-set-key (kbd "<f9>") 'gud-break)
+;;(global-set-key [C-f9] 'gud-remove)
+(global-set-key (kbd "<f10>") 'gud-next)
+;;(global-set-key [C-f10] 'gud-until)
+;;(global-set-key [S-f10] 'gud-jump)
+(global-set-key (kbd "<f11>") 'gud-step)
+(global-set-key (kbd "<f12>") 'gud-finish)
+
+(global-set-key (kbd "C-c <up>") 'windmove-up)
+(global-set-key (kbd "C-c <down>") 'windmove-down)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <left>") 'windmove-left)
 
