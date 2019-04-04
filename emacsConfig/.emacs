@@ -1,5 +1,12 @@
 ;;(set-language-environment 'UTF-8)
 
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (add-to-list 'load-path "~/.emacs.d/personalLisp")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/autoComplete")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/haxe")
@@ -12,6 +19,7 @@
 (add-to-list 'load-path "~/.emacs.d/personalLisp/cmake")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/cal_china")
 (add-to-list 'load-path "~/.emacs.d/personalLisp/markdown")
+(add-to-list 'load-path "~/.emacs.d/personalLisp/ecb-master")
 
 (display-time-mode 1) ; 显示时间
 (setq display-time-24hr-format t) ; 24小时格式
@@ -92,16 +100,21 @@
 (require 'protobuf-mode)
 (setq auto-mode-alist  (cons '(".proto$" . protobuf-mode) auto-mode-alist))
 
+(require 'ecb)
+
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-(load-theme 'wombat t)
+;;(load-theme 'whiteboard t)
 (tool-bar-mode 0)
-(menu-bar-mode 0)
+;;(menu-bar-mode 0)
 (scroll-bar-mode 0)
+(setq-default tab-width 4)
+(setq-default truncate-lines 1)  ;; disable wordwrap
+(prefer-coding-system 'gb18030)
 
 ;; shortcut keys ==============================
 
